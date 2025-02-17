@@ -1,11 +1,11 @@
 {
   "name": "testfile",
   "version": "1.0.0",
-  "main": "testfile.js",
- "scripts": {
-  "start": "node server.js",
-  "build": "echo 'No build step required'"
-},
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'Static HTML site, no server needed'",
+    "build": "echo 'No build step required'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ericyoonKr/Test.git"
