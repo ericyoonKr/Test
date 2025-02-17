@@ -1,0 +1,38 @@
+name: Build and Deploy Node.js app to Azure Web App - dankookpractice
+
+on:
+  push:
+    branches:
+      - main  # 메인 브랜치에 push할 때 배포 실행
+
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 빌드 환경
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'  # Azure에서 사용 중인 Node.js 버전과 맞추기
+
+      - name: Install Dependencies
+        run: npm install  # package.json에 있는 의존성 설치
+
+      - name: Build Project (Optional)
+        run: npm run build  # `build` 스크립트가 필요하다면 실행
+
+      - name: Zip the project for deployment
+        run: zip -r release.zip . -x '*.git*'  # 빌드된 프로젝트 압축
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'dankookpractice'  # Azure 웹앱 이름
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: release.zip
