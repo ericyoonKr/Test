@@ -1,4 +1,4 @@
-name: Deploy Node.js app to Azure Web App - dankookpractice
+name: Deploy Node.js App to Azure Web App - dankookpractice
 
 on:
   push:
@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Azure Login  # ✅ Azure 로그인 추가
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_PUBLISH_PROFILE }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
