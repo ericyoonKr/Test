@@ -21,10 +21,7 @@
     </style>
 </head>
 <body>
-    <h1>Dankook Time Table using JavaScript</h1>
-
-    <input type="file" id="csvFileInput" accept=".csv">
-    <button onclick="uploadCSV()">업로드</button>
+    <h1>Dankook Time Table</h1>
 
     <div id="tableContainer"></div>
 
@@ -60,31 +57,6 @@
 
             document.getElementById("tableContainer").innerHTML = "";
             document.getElementById("tableContainer").appendChild(table);
-        }
-
-        function uploadCSV() {
-            const fileInput = document.getElementById("csvFileInput");
-            if (!fileInput.files.length) {
-                alert("CSV 파일을 선택하세요.");
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append("file", fileInput.files[0]);
-
-            fetch("/upload", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert("업로드 성공! 페이지를 새로고침하면 반영됩니다.");
-                location.reload();
-            })
-            .catch(error => {
-                console.error("파일 업로드 실패:", error);
-                alert("업로드 실패!");
-            });
         }
     </script>
 </body>
