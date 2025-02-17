@@ -11,7 +11,7 @@ const filePath = path.join(__dirname, "소프트웨어학과_시간표.csv");
 // ✅ 서버 시작 시 CSV 파일 존재 여부 확인
 if (!fs.existsSync(filePath)) {
     console.error("🚨 CSV 파일이 없습니다: 소프트웨어학과_시간표.csv");
-    process.exit(1); // CSV 파일이 없으면 서버 종료
+    process.exit(1); // 파일이 없으면 서버 종료
 }
 
 // ✅ 정적 파일 제공 (index.html, CSS 등)
